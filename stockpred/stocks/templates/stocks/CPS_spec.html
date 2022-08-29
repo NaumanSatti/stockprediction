@@ -1,0 +1,393 @@
+{% extends 'stocks/main.html' %}
+
+{% load static %}
+{% block title %}
+Stock Prediction (Specific Company)
+{% endblock title %}
+{% block extrastyle %}
+<style>
+    .loader-wrapper {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #1a63d1;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  border: 4px solid #Fff;
+  
+  animation: loader 2s infinite ease;
+}
+
+.loader-inner {
+  vertical-align: top;
+  display: inline-block;
+  width: 100%;
+  background-color: #fff;
+  animation: loader-inner 2s infinite ease-in;
+}
+
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  
+  25% {
+    transform: rotate(180deg);
+  }
+  
+  50% {
+    transform: rotate(180deg);
+  }
+  
+  75% {
+    transform: rotate(360deg);
+  }
+  
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loader-inner {
+  0% {
+    height: 0%;
+  }
+  
+  25% {
+    height: 0%;
+  }
+  
+  50% {
+    height: 100%;
+  }
+  
+  75% {
+    height: 100%;
+  }
+  
+  100% {
+    height: 0%;
+  }
+}
+
+.ticker-wrapper-h{
+	display: flex;	
+	position: relative;
+	overflow: hidden;
+	border: 1px solid #1461b9;
+}
+
+.ticker-wrapper-h .heading{
+	background-color: #1461b9;
+	color: #fff;
+	padding: 5px 10px;
+	flex: 0 0 auto;
+	z-index: 1000;
+}
+.ticker-wrapper-h .heading:after{
+	content: "";
+	position: absolute;
+	top: 0;
+	border-left: 20px solid #1461b9;
+	border-top: 17px solid transparent;
+	border-bottom: 15px solid transparent;
+}
+
+
+.news-ticker-h{
+	display: flex;
+	margin:0;
+	padding: 0;
+	padding-left: 90%;
+	z-index: 999;
+	
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+	animation-name: tic-h;
+	animation-duration: 30s;
+	
+}
+.news-ticker-h:hover { 
+	animation-play-state: paused; 
+}
+
+.news-ticker-h li{
+	display: flex;
+	width: 100%;
+    height: 100%;
+	align-items: center;
+	white-space: nowrap;
+	padding-left: 20px;
+}
+
+.news-ticker-h li a{
+	color: #33597f;
+	font-weight: bold;
+    font-size: 20px;
+}
+
+@keyframes tic-h {
+	0% {
+		-webkit-transform: translate3d(0, 0, 0);
+		transform: translate3d(0, 0, 0);
+		visibility: visible;
+	}
+	100% {
+		-webkit-transform: translate3d(-100%, 0, 0);
+		transform: translate3d(-100%, 0, 0);
+	}
+}
+</style>
+
+{% endblock%}
+{% block content%}
+
+<main id="main" class="main">
+    
+  <div class="pagetitle">
+    <h1>Closing Price Stock</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Closing Price Stock</a></li>
+        <li class="breadcrumb-item active">For Specific Company</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+  
+  <section class="section dashboard">
+    <div class="row">
+
+      <!-- Left side columns -->
+      <div class="col-lg-12">
+        <div class="row">
+
+          <!-- Sales Card -->
+          
+          <!-- Customers Card -->
+          
+          <!-- Reports -->
+          <div class="col-12">
+            <div class="card">
+
+              
+
+              <div class="card-body">
+                <h5 class="card-title">Form For Fetching Record for Specific Company <span>/Enter Your Data</span></h5>
+                <div class="container">
+                    <form method="POST"  action="">
+                        {% csrf_token %}
+                        <div class="mb-3 mt-3">
+                            <label for="company">Choose a Company:</label>
+                            <br/>
+                            <select name="company_name" id="company_name">
+                              <option value="AMZN">AMAZON</option>
+                              <option value="AAPL">APPLE</option>
+                              <option value="GOOG">GOOGLE</option>
+                              <option value="MSFT">MICROSOFT</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                          <label for="pwd" class="form-label">Type of Data:</label>
+                          <input type="text" class="form-control" id="pwd" value="Closing Price (ADJ CLOSE)" readonly name="adj_close">
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                      </form>
+                </div>
+                <!-- Line Chart -->
+                
+              </div>
+
+            </div>
+          </div><!-- End Reports -->
+
+          <!-- Recent Sales -->
+          {% if json_records %}
+          <div class="col-12">
+            <div class="card recent-sales overflow-auto">
+
+              
+              <div class="card-body">
+                <h5 class="card-title">Close Price Stock Data for: {{c}}  <span>| Tabular Form</span></h5>
+
+                <table class="table table-borderless datatable">
+                    <thead>
+                        <tr>
+                            
+                          <th></th>
+                          <th>Open</th>
+                          <th>High</th>
+                          <th>Low</th>
+                          <th>Close</th>
+                          <th>Adj Close</th>
+                          <th>Volume</th>
+                          
+                        </tr>
+                        <tr>
+                          <th>Date</th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          
+                        </tr>
+                      </thead>
+                      <tbody>
+                        
+                        {% for item1, item2 in data %}
+                        <tr>
+                         
+                          <th>{{item2}}</th>
+                          <td>{{item1.Open}}</td>
+                          <td>{{item1.High}}</td>
+                          <td>{{item1.Low}}</td>
+                          <td>{{item1.Close}}</td>
+                          <td>{{item1.Adj_Close}}</td>
+                          <td>{{item1.Volume}}</td>
+                          
+    
+    
+                        </tr>
+                        {% endfor %}
+                        
+                        
+                    </tbody>
+                </table>
+
+              </div>
+
+            </div>
+          </div>
+          {% endif %}
+          
+        </div>
+      </div><!-- End Left side columns -->
+
+      <!-- Right side columns -->
+      
+        <!-- Budget Report -->
+        {% if json_records %}
+        <div class="card">
+          
+
+          <div class="card-body pb-0">
+            <h5 class="card-title">Closing Price History for: {{c}} <span>| Graphical Representation</span></h5>
+            <img style="width:95%;" src="{% static 'images/cph.png' %}" alt="">
+            
+
+            
+          </div>
+        </div><!-- End Budget Report -->
+        {% endif %}
+        
+        {% if json_records %}
+        <!-- Website Traffic -->
+        <div class="card">
+          
+            
+          <div class="card-body pb-0">
+            <h5 class="card-title">ROOT MEAN SQUARE VALUE <span>| {{c}}</span></h5>
+            <div class="ticker-wrapper-h">
+                <div class="heading">ROOT MEAN SQUARE VALUE For {{c}}: {{rmse}}</div>
+                
+                <ul class="news-ticker-h">
+                    <li><a href="">THE ROOT MEAN SQUARE VALUE FOR {{c}} is: {{rmse}}</a></li>
+                   
+                </ul>
+            </div>
+            
+          </div>
+        </div><!-- End Website Traffic -->
+        {% endif %}
+        <!-- News & Updates Traffic -->
+        {% if json_records %}
+        <div class="card">
+          
+
+          <div class="card-body pb-0">
+            <h5 class="card-title">Predictions from Model For Company: <span>| {{c}}</span></h5>
+
+            <div class="news">
+                <img style="width:95%;" src="{% static 'images/pred.png' %}" alt="">
+            </div><!-- End sidebar recent posts-->
+
+          </div>
+        </div><!-- End News & Updates -->
+
+      </div><!-- End Right side columns -->
+      {% endif %}
+
+      {% if json_records %}
+          <div class="col-12">
+            <div class="card recent-sales overflow-auto">
+
+              
+              <div class="card-body">
+                <h5 class="card-title">Valid and Predicted Prices For: {{c}}  <span>| Tabular Form</span></h5>
+
+                <table class="table table-borderless datatable">
+                    <thead>
+                        <tr>
+                            
+                          <th></th>
+                          <th>Close</th>
+                          <th>Predictions</th>
+                          
+                          
+                        </tr>
+                        <tr>
+                          <th>Date</th>
+                          <th></th>
+                          <th></th>
+                          
+                        </tr>
+                      </thead>
+                      <tbody>
+                        
+                        {% for item1, item2 in dataValid %}
+                        <tr>
+                         
+                          <th>{{item2}}</th>
+                          <td>{{item1.Close}}</td>
+                          <td>{{item1.Predictions}}</td>
+                          
+    
+    
+                        </tr>
+                        {% endfor %}
+                        
+                        
+                    </tbody>
+                </table>
+
+              </div>
+
+            </div>
+          </div>
+          {% endif %}
+          
+    </div>
+  </section>
+  
+</main><!-- End #main -->
+<div class="loader-wrapper">
+    <span class="loader"><span class="loader-inner"></span></span>
+   </div>
+   <script>
+    $(window).on("load",function(){
+$(".loader-wrapper").fadeOut("slow");
+});
+</script>
+{% endblock content %}

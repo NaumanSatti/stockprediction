@@ -1,0 +1,167 @@
+{% extends 'stocks/main.html' %}
+
+{% load static %}
+{% block title %}
+About Section  
+{% endblock title %}
+
+{% block content%}
+
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>Stock Prediction Website for Apple, Amazon, Google, and Microsoft.</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active">Stock Prediction</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+  <section class="section dashboard">
+    <div class="row">
+
+      <!-- Left side columns -->
+      <div class="col-lg-12">
+        <div class="row">
+
+          <!-- Sales Card -->
+          <div class="col-xxl-12 col-md-6">
+            <div class="card info-card sales-card">
+
+             
+              <div class="card-body">
+                <h5 class="card-title">MOTO </h5>
+
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <img  src="https://img.icons8.com/cute-clipart/64/000000/apple-stocks.png"/>
+                  </div>
+                  <div class="ps-3">
+                    <h6>Stock Prediction Helps You to Buy the Right Stocks.</h6>
+                    <span class="text-success medium pt-1 fw-bold">Get Analyst Price Targets, Earnings Forecasts, Revenue Forecast and Much More for major of 4 Stocks.</span> 
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div><!-- End Sales Card -->
+
+          <!-- Revenue Card -->
+          
+          <!-- Reports -->
+          <div class="col-12">
+            <div class="card">
+
+              
+              <div class="card-body">
+                <h5 class="card-title">Reports <span>/Today</span></h5>
+
+                <!-- Line Chart -->
+                <div id="reportsChart">
+                  <img style="width:100%; height:50%;" src="{% static 'images/stocks.jpg' %}"/>
+                </div>
+
+              </div>
+
+            </div>
+          </div><!-- End Reports -->
+
+          <!-- Recent Sales -->
+          <div class="col-12">
+            
+
+              <div class="card-body">
+                <h5 class="card-title">A Detailed Guide to Stock Forecast: Everything You Need to Know </h5>
+
+                <p>
+                  The stock forecast is essentially a prediction of future stock prices. It is important to note that stock prices can be affected by various factors, including global events, company performance, and even the weather. As such, making an accurate prediction is no easy feat. But there are a number of methods and tools that analysts use to predict future stock prices with some degree of accuracy.
+
+                </p>
+                <br/>
+                <br/>
+                <p>
+                  In this guide, we will look at some of the most popular methods for forecasting stock prices, as well as some of the critical factors that can affect stock prices. We will also provide a few tips on how you can use stock forecasts to make better investment decisions.
+                </p>
+              </div>
+
+            </div>
+          </div><!-- End Recent Sales -->
+
+          <!-- Top Selling -->
+          <div class="col-12">
+            <div class="card top-selling overflow-auto">
+
+             
+              <div class="card-body pb-0">
+                <h5 class="card-title">About This App </h5>
+                <p class="h4">This app is simply a prediction of where the stock prices of major 4 companies will go in the future. Many factors go into making a stock forecast, including company financials, historical stock price trends, and analyst ratings. While there is no guarantee that a stock forecast will be accurate, it can give you a good idea of where the stock price is headed. This information can be helpful when making investment decisions.</p>
+                <br/>
+                <p class="h4">This app predicts the stock for 4 major companies like Apple, Amazon, Google, and Microsoft. </p>
+                <br/>
+                <p class="h4"> To Get valuable insights about the main data for these 4 companies <a class="btn btn-primary" href="{% url 'all' %}">Click Here</a>
+                
+                <br/>
+                <p class="h4"> To Get predictions of stocks of Specific company, and for calculation of ROOT MEAN SQUARE VALUE  <a class="btn btn-success" href="{% url 'cpsspec' %}">Click Here</a>
+                
+              </div>
+
+            </div>
+          </div><!-- End Top Selling -->
+
+        </div>
+      </div><!-- End Left side columns -->
+
+      <!-- Right side columns -->
+      
+        <!-- Budget Report -->
+        <div class="card">
+          
+
+          <div class="card-body pb-0">
+            <h5 class="card-title">The benefits of using a stock forecast <span>| List View</span></h5>
+
+            <div id="budgetChart"   class="echart">
+              <p class="h5">Stock forecasts can be a helpful tool for making investment decisions. They can help you:</p>
+              <ul>
+                <li>Identify undervalued and overvalued stocks: when a stock's price is not in line with its fundamentals, it may be undervalued or overvalued. Why buy an overvalued stock when you can buy an undervalued stock for less? This is where stock price targets can be helpful.</li>
+                <li>Make buy, hold, or sell decisions: stock forecasts can help you decide when to buy or sell a stock. If you're bullish on a stock, you may want to buy it if the forecast is positive. If you're bearish on a stock, you may want to sell it if the forecast is negative.</li>
+                <li>Time your investments: stock forecasts can help you time your investments. If you're buying a stock, you may want to wait for the price to drop to its target before buying. This can help you get a better price and reduce your risk.</li>
+                <li>Monitor your portfolio: if you have stocks in your portfolio that are not performing well, you may want to sell them if the forecast is negative. This can help you minimize your losses and free up cash to invest in better- performing stocks.</li>
+                <li>Monitor stock price movements: stock forecasts can help you monitor stock price movements. This can be helpful if you're trying to time your investments or sell a stock.</li>
+                <li>Make more informed investment decisions: it all comes down to making more informed investment decisions. Stock forecasts can help you do just that. A good stock forecast can help you separate the wheat from the chaff. With so many stocks to choose from, it can be challenging to know which ones are worth investing in. A stock forecast can help you narrow down your options and make more informed investment decisions.</li>
+
+              </ul>
+            </div>
+
+            
+          </div>
+        </div><!-- End Budget Report -->
+
+        <!-- Website Traffic -->
+        <div class="card">
+          
+
+          <div class="card-body pb-0">
+            <h5 class="card-title">Attention <span>| Important Note</span></h5>
+
+            <div id="trafficChart"  class="echart">
+             <p class="h5" > As you can see, there are many benefits to using a stock forecast. However, it's important to remember that they are not guarantees. Always do your own research before making any investment decisions.</p>
+            </div>
+
+            
+          </div>
+        </div><!-- End Website Traffic -->
+
+       
+      </div><!-- End Right side columns -->
+
+    </div>
+  </section>
+
+</main><!-- End #main -->
+
+
+{% endblock content %}

@@ -1,0 +1,535 @@
+{% extends 'stocks/main.html' %}
+{% load static %}
+{% block title %}
+CPS (ALL COMPANIES)
+{% endblock title %}
+{% block extrastyle %}
+  
+<style>
+    .loader-wrapper {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #1a63d1;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  border: 4px solid #Fff;
+  
+  animation: loader 2s infinite ease;
+}
+
+.loader-inner {
+  vertical-align: top;
+  display: inline-block;
+  width: 100%;
+  background-color: #fff;
+  animation: loader-inner 2s infinite ease-in;
+}
+
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  
+  25% {
+    transform: rotate(180deg);
+  }
+  
+  50% {
+    transform: rotate(180deg);
+  }
+  
+  75% {
+    transform: rotate(360deg);
+  }
+  
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loader-inner {
+  0% {
+    height: 0%;
+  }
+  
+  25% {
+    height: 0%;
+  }
+  
+  50% {
+    height: 100%;
+  }
+  
+  75% {
+    height: 100%;
+  }
+  
+  100% {
+    height: 0%;
+  }
+}
+</style>
+{% endblock%}
+{% block content%}
+
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>Closing Price Stock (Combined Data For All Companies)</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="">Home</a></li>
+        <li class="breadcrumb-item active">Closing Price Stock for Apple, Google, MICROSOFT, and AMAZON</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+  <section class="section dashboard">
+    <div class="row">
+
+      <!-- Left side columns -->
+      <div class="col-lg-12">
+        <div class="row">
+
+          
+          <!-- Customers Card -->
+          <div class="col-xxl-6 col-xl-12">
+
+            <div class="card info-card customers-card">
+
+              
+              <div class="card-body">
+                <h5 class="card-title">Closing Price Stock  <span>| for Apple</span></h5>
+
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class="bi bi-apple"></i>
+                  </div>
+                  <div class="ps-3">
+                    <h6>Data For Apple: Tabular Form</h6>
+                  </div>
+                  
+                </div>
+                <table class="table table-borderless datatable">
+                  <thead>
+                    <tr>
+                        
+                      <th></th>
+                      <th>Open</th>
+                      <th>High</th>
+                      <th>Low</th>
+                      <th>Close</th>
+                      <th>Adj Close</th>
+                      <th>Volume</th>
+                      
+                    </tr>
+                    <tr>
+                      <th>Date</th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% if json_records %}
+                    {% for item1, item2 in dataApple %}
+                    <tr>
+                     
+                      <th>{{item2}}</th>
+                      <td>{{item1.Open}}</td>
+                      <td>{{item1.High}}</td>
+                      <td>{{item1.Low}}</td>
+                      <td>{{item1.Close}}</td>
+                      <td>{{item1.Adj_Close}}</td>
+                      <td>{{item1.Volume}}</td>
+                      
+
+
+
+                    </tr>
+                    {% endfor %}
+                    {% endif %}
+                    
+                </tbody>
+                    
+                </table>
+
+
+              </div>
+            </div>
+
+          </div><!-- End Customers Card -->
+          <!-- Customers Card -->
+          <div class="col-xxl-6 col-xl-12">
+
+            <div class="card info-card customers-card">
+
+              
+              <div class="card-body">
+                <h5 class="card-title">Closing Price Stock  <span>| for Amazon</span></h5>
+
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <img src="https://img.icons8.com/material/48/000000/amazon.png"/>
+                  </div>
+                  <div class="ps-3">
+                    <h6>Data For Amazon: Tabular Form</h6>
+                  </div>
+                  
+                </div>
+                <table class="table table-borderless datatable">
+                  <thead>
+                    <tr>
+                        
+                      <th></th>
+                      <th>Open</th>
+                      <th>High</th>
+                      <th>Low</th>
+                      <th>Close</th>
+                      <th>Adj Close</th>
+                      <th>Volume</th>
+                      
+                    </tr>
+                    <tr>
+                      <th>Date</th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% if arr_Ama %}
+                    {% for item1, item2 in dataAmazon %}
+                    <tr>
+                     
+                      <th>{{item2}}</th>
+                      <td>{{item1.Open}}</td>
+                      <td>{{item1.High}}</td>
+                      <td>{{item1.Low}}</td>
+                      <td>{{item1.Close}}</td>
+                      <td>{{item1.Adj_Close}}</td>
+                      <td>{{item1.Volume}}</td>
+                      
+
+
+
+                    </tr>
+                    {% endfor %}
+                    {% endif %}
+                    
+                </tbody>
+                
+                </table>
+
+
+              </div>
+            </div>
+
+          </div><!-- End Customers Card -->
+
+
+          <!-- Customers Card -->
+          <div class="col-xxl-6 col-xl-12">
+
+            <div class="card info-card customers-card">
+
+              
+              <div class="card-body">
+                <h5 class="card-title">Closing Price History  <span>| for Apple</span></h5>
+
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class="bi bi-apple"></i>
+                  </div>
+                  <div class="ps-3">
+                    <h6>CPH For Apple: Graphical Form</h6>
+                  </div>
+                  
+                </div>
+                <img style="width:100%; height:100%;" src="{% static 'images/cph_Apple.png' %}" alt="">
+
+              </div>
+            </div>
+
+          </div><!-- End Customers Card -->
+          <!-- Customers Card -->
+          <div class="col-xxl-6 col-xl-12">
+
+            <div class="card info-card customers-card">
+
+              
+              <div class="card-body">
+                <h5 class="card-title">Closing Price History  <span>| for Amazon</span></h5>
+
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <img src="https://img.icons8.com/material/48/000000/amazon.png"/>
+                  </div>
+                  <div class="ps-3">
+                    <h6>CPH For Amazon: Graphical Form</h6>
+                  </div>
+                  
+                </div>
+                <img style="width:100%; height:100%;" src="{% static 'images/cph_Amazon.png' %}" alt="">
+
+
+              </div>
+            </div>
+
+          </div><!-- End Customers Card -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <!-- Customers Card -->
+                    <div class="col-xxl-6 col-xl-12">
+
+                      <div class="card info-card customers-card">
+          
+                        
+                        <div class="card-body">
+                          <h5 class="card-title">Closing Price Stock  <span>| for Microsoft</span></h5>
+          
+                          <div class="d-flex align-items-center">
+                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                              <i class="bi bi-microsoft"></i>
+                            </div>
+                            <div class="ps-3">
+                              <h6>Data For Microsoft: Tabular Form</h6>
+                            </div>
+                            
+                          </div>
+                          <table class="table table-borderless datatable">
+                            <thead>
+                              <tr>
+                                  
+                                <th></th>
+                                <th>Open</th>
+                                <th>High</th>
+                                <th>Low</th>
+                                <th>Close</th>
+                                <th>Adj Close</th>
+                                <th>Volume</th>
+                                
+                              </tr>
+                              <tr>
+                                <th>Date</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {% if arr_Mic %}
+                              {% for item1, item2 in dataMicrosoft %}
+                              <tr>
+                               
+                                <th>{{item2}}</th>
+                                <td>{{item1.Open}}</td>
+                                <td>{{item1.High}}</td>
+                                <td>{{item1.Low}}</td>
+                                <td>{{item1.Close}}</td>
+                                <td>{{item1.Adj_Close}}</td>
+                                <td>{{item1.Volume}}</td>
+                                
+          
+          
+          
+                              </tr>
+                              {% endfor %}
+                              {% endif %}
+                              
+                          </tbody>
+                          
+                              
+                          </table>
+          
+          
+                        </div>
+                      </div>
+          
+                    </div><!-- End Customers Card -->
+                    <!-- Customers Card -->
+                    <div class="col-xxl-6 col-xl-12">
+          
+                      <div class="card info-card customers-card">
+          
+                        
+                        <div class="card-body">
+                          <h5 class="card-title">Closing Price Stock  <span>| for Google</span></h5>
+          
+                          <div class="d-flex align-items-center">
+                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                              <i class="bi bi-google"></i>
+                            </div>
+                            <div class="ps-3">
+                              <h6>Data For Google: Tabular Form</h6>
+                            </div>
+                            
+                          </div>
+                          <table class="table table-borderless datatable">
+                            <thead>
+                              <tr>
+                                  
+                                <th></th>
+                                <th>Open</th>
+                                <th>High</th>
+                                <th>Low</th>
+                                <th>Close</th>
+                                <th>Adj Close</th>
+                                <th>Volume</th>
+                                
+                              </tr>
+                              <tr>
+                                <th>Date</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {% if arr_Goo %}
+                              {% for item1, item2 in dataGoogle %}
+                              <tr>
+                               
+                                <th>{{item2}}</th>
+                                <td>{{item1.Open}}</td>
+                                <td>{{item1.High}}</td>
+                                <td>{{item1.Low}}</td>
+                                <td>{{item1.Close}}</td>
+                                <td>{{item1.Adj_Close}}</td>
+                                <td>{{item1.Volume}}</td>
+                                
+          
+          
+          
+                              </tr>
+                              {% endfor %}
+                              {% endif %}
+                              
+                          </tbody>
+                          
+                          </table>
+          
+          
+                        </div>
+                      </div>
+          
+                    </div><!-- End Customers Card -->
+          
+          
+                    <!-- Customers Card -->
+                    <div class="col-xxl-6 col-xl-12">
+          
+                      <div class="card info-card customers-card">
+          
+                        
+                        <div class="card-body">
+                          <h5 class="card-title">Closing Price History  <span>| for Microsoft</span></h5>
+          
+                          <div class="d-flex align-items-center">
+                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                              <i class="bi bi-microsoft"></i>
+                            </div>
+                            <div class="ps-3">
+                              <h6>CPH For Microsoft: Graphical Form</h6>
+                            </div>
+                            
+                          </div>
+                          <img style="width:100%; height:100%;" src="{% static 'images/cph_Microsoft.png' %}" alt="">
+          
+                        </div>
+                      </div>
+          
+                    </div><!-- End Customers Card -->
+                    <!-- Customers Card -->
+                    <div class="col-xxl-6 col-xl-12">
+          
+                      <div class="card info-card customers-card">
+          
+                        
+                        <div class="card-body">
+                          <h5 class="card-title">Closing Price History  <span>| for Google</span></h5>
+          
+                          <div class="d-flex align-items-center">
+                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                              <i class="bi bi-google"></i>
+                            </div>
+                            <div class="ps-3">
+                              <h6>CPH For Google: Graphical Form</h6>
+                            </div>
+                            
+                          </div>
+                          <img style="width:100%; height:100%;" src="{% static 'images/cph_Google.png' %}" alt="">
+          
+          
+                        </div>
+                      </div>
+          
+                    </div><!-- End Customers Card -->
+          
+          
+          
+
+
+
+
+
+
+
+
+                    </div>
+
+    </div>      
+    </div>
+  </section>
+
+  <div class="loader-wrapper">
+    <span class="loader"><span class="loader-inner"></span></span>
+   </div>
+    </main>
+
+    <script>
+            $(window).on("load",function(){
+     $(".loader-wrapper").fadeOut("slow");
+});
+    </script><!-- End #main -->
+
+
+{% endblock content %}

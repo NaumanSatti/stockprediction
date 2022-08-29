@@ -1,0 +1,1238 @@
+{% extends 'stocks/main.html' %}
+
+{% load static %}
+{% block title %}
+Main Data (Specific Company) 
+{% endblock title %}
+
+{% block content%}
+
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>Main Data For Specific Company</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Data for Specific Company</a></li>
+        <li class="breadcrumb-item active">By Using Forms</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+  <section class="section dashboard">
+    <div class="row">
+
+      <!-- Left side columns -->
+      <div class="col-lg-12">
+        <div class="row">
+
+          
+          <!-- Reports -->
+          <div class="col-12">
+            <div class="card">
+
+              
+
+              <div class="card-body">
+                <h5 class="card-title">Form For Searching Specific Data For <span>/Specific Company</span></h5>
+
+                <!-- Line Chart -->
+                <form method="POST"  action="">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="company">Choose a Company:</label>
+                        <br/>
+                        <select name="company_name" id="company_name" style="width:100%">
+                          <option value="AMZN">AMAZON</option>
+                          <option value="AAPL">APPLE</option>
+                          <option value="GOOG">GOOGLE</option>
+                          <option value="MSFT">MICROSOFT</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="company">Choose Type of Record:</label>
+                        <br/>
+                        <select name="data_type" id="data_type" style="width:100%">
+                          <option value="ALL">ALL RECORD</option>
+                          <option value="CPS">CLOSING PRICE STOCK (TABULAR & GRAPHICAL)</option>
+                          <option value="SV">SALES VOLUME (TABULAR & GRAPHICAL)</option>
+                          <option value="MA">Moving Averages (HISTOGRAM & GRAPHICAL)</option>
+                          <option value="DR">Daily Return of the stock on Average (HISTOGRAM & GRAPHICAL)</option>
+                          
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
+          
+                
+
+              </div>
+
+            </div>
+          </div><!-- End Reports -->
+        
+          {% if json_records_APPLE_ALL %}
+          <!-- Recent Sales -->
+          <div class="col-12">
+            
+
+              <div class="card-body">
+                <h5 class="card-title">ALL DATA FOR: APPLE <span>| TABULAR FORM</span></h5>
+
+                <table class="table table-borderless datatable">
+                    <thead>
+                        <tr>
+                            
+                          <th></th>
+                          <th>Open</th>
+                          <th>High</th>
+                          <th>Low</th>
+                          <th>Close</th>
+                          <th>Adj Close</th>
+                          <th>Volume</th>
+                          <th>company_name</th>
+                        </tr>
+                        <tr>
+                          <th>Date</th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% if json_records_APPLE_ALL %}
+                        {% for item1, item2 in dataApple %}
+                        <tr>
+                         
+                          <th>{{item2}}</th>
+                          <td>{{item1.Open}}</td>
+                          <td>{{item1.High}}</td>
+                          <td>{{item1.Low}}</td>
+                          <td>{{item1.Close}}</td>
+                          <td>{{item1.Adj_Close}}</td>
+                          <td>{{item1.Volume}}</td>
+                          <td>{{item1.company_name}}</td>
+    
+    
+    
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                        
+                    </tbody>
+                </table>             
+             </div>
+
+            </div>
+          </div><!-- End Recent Sales -->
+
+          <!-- Top Selling -->
+          
+        </div>
+      </div><!-- End Left side columns -->
+
+      <!-- Right side columns -->
+      <div class="card">
+          
+        <div class="card-body pb-0">
+            <h5 class="card-title">Closing Price HISTORY FOR Apple <span>| Graphical Form</span></h5>
+
+          <img style="width:95%;" src="{% static 'images/CCPHH_APPLE.png' %}" alt="">
+        </div>
+      </div><!-- End Budget Report -->
+
+        <!-- Budget Report -->
+        <div class="card">
+          
+          <div class="card-body pb-0">
+            <h5 class="card-title">Sales Volume FOR Apple <span>| Graphical Form</span></h5>
+
+            <img style="width:95%;" src="{% static 'images/SV_APPLE.png' %}" alt="">
+          </div>
+        </div><!-- End Budget Report -->
+
+        <!-- Website Traffic -->
+        <div class="card">
+          
+
+          <div class="card-body pb-0">
+            <h5 class="card-title">Exploratory Analysis for 10, 20, and 50 days For Apple <span>| Graphical Form</span></h5>
+            <img style="width:95%; height: 100%;" src="{% static 'images/MAA_APPLE.png' %}" alt="">
+
+            
+          </div>
+        </div><!-- End Website Traffic -->
+
+        <!-- News & Updates Traffic -->
+        <div class="card">
+          
+          <div class="card-body pb-0">
+            
+            <h5 class="card-title">Daily Return For Apple <span>| Graphical Form</span></h5>
+            <img style="width:95%;" src="{% static 'images/DRR_APPLE.png' %}" alt="">
+
+            
+            
+            </div><!-- End sidebar recent posts-->
+
+          </div>
+        </div><!-- End News & Updates -->
+        <div class="card">
+          
+          <div class="card-body pb-0">
+            
+            <h5 class="card-title">Daily Return For APPLE <span>| HISTOGRAM</span></h5>
+            <img style="width:95%; height: 90%;" src="{% static 'images/DRR_HIST_APPLE.png' %}" alt="">
+  
+            
+            
+            </div><!-- End sidebar recent posts-->
+  
+          </div>
+        </div><!-- End News & Updates -->
+      
+      </div><!-- End Right side columns -->
+
+      {% elif type_of_data %}
+      <div class="col-12">
+            
+
+        <div class="card-body">
+          <h5 class="card-title">CLOSING PRICE STOCK DATA FOR: APPLE <span>| TABULAR FORM</span></h5>
+
+          <table class="table table-borderless datatable">
+              <thead>
+                  <tr>
+                      
+                    <th></th>
+                    
+                    <th>Adj Close</th>
+                   
+                    <th>company_name</th>
+                  </tr>
+                  <tr>
+                    <th>Date</th>
+                    
+                    
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% if json_records_APPLE_CPS %}
+                  {% for item1, item2 in dataApple_CPS %}
+                  <tr>
+                   
+                    <th>{{item2}}</th>
+                    <td>{{item1.Adj_Close}}</td>
+                    <td>APPLE</td>
+                    
+
+
+                  </tr>
+                  {% endfor %}
+                  {% endif %}
+                  
+              </tbody>
+          </table>             
+       </div>
+
+      </div>
+      <div class="card">
+          
+        <div class="card-body pb-0">
+          
+          <h5 class="card-title">Closing Price History For Apple <span>| Graphical Form</span></h5>
+          <img style="width:95%;" src="{% static 'images/CCPHH_APPLE.png' %}" alt="">
+
+          
+          
+          </div><!-- End sidebar recent posts-->
+
+        </div>
+      </div><!-- End News & Updates -->
+      {% elif typeofdatat %}
+      <div class="col-12">
+            
+
+        <div class="card-body">
+          <h5 class="card-title">SALES VOLUME DATA FOR: APPLE <span>| TABULAR FORM</span></h5>
+
+          <table class="table table-borderless datatable">
+              <thead>
+                  <tr>
+                      
+                    <th></th>
+                    
+                    <th>Volume</th>
+                   
+                    <th>company_name</th>
+                  </tr>
+                  <tr>
+                    <th>Date</th>
+                    
+                    
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% if json_records_Vol_Apple %}
+                  {% for item1, item2 in dataApple_SV %}
+                  <tr>
+                   
+                    <th>{{item2}}</th>
+                    <td>{{item1.Volume}}</td>
+                    <td>APPLE</td>
+                    
+
+
+                  </tr>
+                  {% endfor %}
+                  {% endif %}
+                  
+              </tbody>
+          </table>             
+       </div>
+
+      </div>
+      <div class="card">
+          
+        <div class="card-body pb-0">
+          
+          <h5 class="card-title">Sales Volume For Apple <span>| Graphical Form</span></h5>
+          <img style="width:95%;" src="{% static 'images/SV_APPLE.png' %}" alt="">
+
+          
+          
+          </div><!-- End sidebar recent posts-->
+
+        </div>
+      </div><!-- End News & Updates -->
+      {% elif ddtype %}
+      <div class="card">
+          
+        <div class="card-body pb-0">
+          
+          <h5 class="card-title">Exploratory Analysis for 10, 20, and 50 days For Apple <span>| Graphical Form</span></h5>
+          <img style="width:95%; height: 90%;" src="{% static 'images/MAA_APPLE.png' %}" alt="">
+
+          
+          
+          </div><!-- End sidebar recent posts-->
+
+        </div>
+      </div><!-- End News & Updates -->
+      {% elif dddtype %}
+      <div class="card">
+          
+        <div class="card-body pb-0">
+          
+          <h5 class="card-title">Daily Return For Apple <span>| Graphical Form</span></h5>
+          <img style="width:95%; height: 90%;" src="{% static 'images/DRR_APPLE.png' %}" alt="">
+
+          
+          
+          </div><!-- End sidebar recent posts-->
+
+        </div>
+      </div><!-- End News & Updates -->
+      <div class="card">
+          
+        <div class="card-body pb-0">
+          
+          <h5 class="card-title">Daily Return For APPLE <span>| HISTOGRAM</span></h5>
+          <img style="width:95%; height: 90%;" src="{% static 'images/DRR_HIST_APPLE.png' %}" alt="">
+
+          
+          
+          </div><!-- End sidebar recent posts-->
+
+        </div>
+      </div><!-- End News & Updates -->
+      {% elif json_records_GOOGLE %}
+          <!-- Recent Sales -->
+          <div class="col-12">
+            
+
+              <div class="card-body">
+                <h5 class="card-title">ALL DATA FOR: GOOGLE <span>| TABULAR FORM</span></h5>
+
+                <table class="table table-borderless datatable">
+                    <thead>
+                        <tr>
+                            
+                          <th></th>
+                          <th>Open</th>
+                          <th>High</th>
+                          <th>Low</th>
+                          <th>Close</th>
+                          <th>Adj Close</th>
+                          <th>Volume</th>
+                          <th>company_name</th>
+                        </tr>
+                        <tr>
+                          <th>Date</th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% if json_records_GOOGLE %}
+                        {% for item1, item2 in dataGOOGLE %}
+                        <tr>
+                         
+                          <th>{{item2}}</th>
+                          <td>{{item1.Open}}</td>
+                          <td>{{item1.High}}</td>
+                          <td>{{item1.Low}}</td>
+                          <td>{{item1.Close}}</td>
+                          <td>{{item1.Adj_Close}}</td>
+                          <td>{{item1.Volume}}</td>
+                          <td>{{item1.company_name}}</td>
+    
+    
+    
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                        
+                    </tbody>
+                </table>             
+             </div>
+
+            </div>
+          </div><!-- End Recent Sales -->
+
+          <!-- Top Selling -->
+          
+        </div>
+      </div><!-- End Left side columns -->
+
+      <!-- Right side columns -->
+      <div class="card">
+          
+        <div class="card-body pb-0">
+            <h5 class="card-title">Closing Price HISTORY FOR GOOGLE <span>| Graphical Form</span></h5>
+
+          <img style="width:95%;" src="{% static 'images/CCPHH_GOOGLE.png' %}" alt="">
+        </div>
+      </div><!-- End Budget Report -->
+
+        <!-- Budget Report -->
+        <div class="card">
+          
+          <div class="card-body pb-0">
+            <h5 class="card-title">Sales Volume FOR GOOGLE <span>| Graphical Form</span></h5>
+
+            <img style="width:95%;" src="{% static 'images/SV_GOOGLE.png' %}" alt="">
+          </div>
+        </div><!-- End Budget Report -->
+
+        <!-- Website Traffic -->
+        <div class="card">
+          
+
+          <div class="card-body pb-0">
+            <h5 class="card-title">Exploratory Analysis for 10, 20, and 50 days For GOOGLE <span>| Graphical Form</span></h5>
+            <img style="width:95%; height: 100%;" src="{% static 'images/MAA_GOOGLE.png' %}" alt="">
+
+            
+          </div>
+        </div><!-- End Website Traffic -->
+
+        <!-- News & Updates Traffic -->
+        <div class="card">
+          
+          <div class="card-body pb-0">
+            
+            <h5 class="card-title">Daily Return For GOOGLE <span>| Graphical Form</span></h5>
+            <img style="width:95%;" src="{% static 'images/DRR_GOOGLE.png' %}" alt="">
+
+            
+            
+            </div><!-- End sidebar recent posts-->
+
+          </div>
+        </div><!-- End News & Updates -->
+
+      </div><!-- End Right side columns -->
+      {% elif CPS_GOOGLE %}
+      <div class="col-12">
+            
+
+        <div class="card-body">
+          <h5 class="card-title">CLOSING PRICE STOCK DATA FOR: GOOGLE <span>| TABULAR FORM</span></h5>
+
+          <table class="table table-borderless datatable">
+              <thead>
+                  <tr>
+                      
+                    <th></th>
+                    
+                    <th>Adj Close</th>
+                   
+                    <th>company_name</th>
+                  </tr>
+                  <tr>
+                    <th>Date</th>
+                    
+                    
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% if json_records_GCPS %}
+                  {% for item1, item2 in dataGOOGLE_CPS %}
+                  <tr>
+                   
+                    <th>{{item2}}</th>
+                    <td>{{item1.Adj_Close}}</td>
+                    <td>GOOGLE</td>
+                    
+
+
+                  </tr>
+                  {% endfor %}
+                  {% endif %}
+                  
+              </tbody>
+          </table>             
+       </div>
+
+      </div>
+      <div class="card">
+          
+        <div class="card-body pb-0">
+          
+          <h5 class="card-title">Closing Price History For GOOGLE <span>| Graphical Form</span></h5>
+          <img style="width:95%;" src="{% static 'images/CCPHH_GOOGLE.png' %}" alt="">
+
+          
+          
+          </div><!-- End sidebar recent posts-->
+
+        </div>
+      </div><!-- End News & Updates -->
+      
+
+
+      {% elif SV_GOOGLE %}
+      <div class="col-12">
+            
+
+        <div class="card-body">
+          <h5 class="card-title">SALES VOLUME DATA FOR: GOOGLE <span>| TABULAR FORM</span></h5>
+
+          <table class="table table-borderless datatable">
+              <thead>
+                  <tr>
+                      
+                    <th></th>
+                    
+                    <th>Volume</th>
+                   
+                    <th>company_name</th>
+                  </tr>
+                  <tr>
+                    <th>Date</th>
+                    
+                    
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% if json_records_GSV %}
+                  {% for item1, item2 in dataGOOGLE_SV %}
+                  <tr>
+                   
+                    <th>{{item2}}</th>
+                    <td>{{item1.Volume}}</td>
+                    <td>GOOGLE</td>
+                    
+
+
+                  </tr>
+                  {% endfor %}
+                  {% endif %}
+                  
+              </tbody>
+          </table>             
+       </div>
+
+      </div>
+      <div class="card">
+          
+        <div class="card-body pb-0">
+          
+          <h5 class="card-title">Sales Volume For GOOGLE <span>| Graphical Form</span></h5>
+          <img style="width:95%;" src="{% static 'images/SV_GOOGLE.png' %}" alt="">
+
+          
+          
+          </div><!-- End sidebar recent posts-->
+
+        </div>
+      </div><!-- End News & Updates -->
+      {% elif MA_GOOGLE %}
+      <div class="card">
+          
+        <div class="card-body pb-0">
+          
+          <h5 class="card-title">Exploratory Analysis for 10, 20, and 50 days For GOOGLE <span>| Graphical Form</span></h5>
+          <img style="width:95%; height: 90%;" src="{% static 'images/MAA_GOOGLE.png' %}" alt="">
+
+          
+          
+          </div><!-- End sidebar recent posts-->
+
+        </div>
+      </div><!-- End News & Updates -->
+      {% elif DR_GOOGLE %}
+      <div class="card">
+          
+        <div class="card-body pb-0">
+          
+          <h5 class="card-title">Daily Return For GOOGLE <span>| Graphical Form</span></h5>
+          <img style="width:95%; height: 90%;" src="{% static 'images/DRR_GOOGLE.png' %}" alt="">
+
+          
+          
+          </div><!-- End sidebar recent posts-->
+
+        </div>
+      </div><!-- End News & Updates -->
+    
+
+      {% elif json_records_MICROSOFT %}
+          <!-- Recent Sales -->
+          <div class="col-12">
+            
+
+              <div class="card-body">
+                <h5 class="card-title">ALL DATA FOR: MICROSOFT <span>| TABULAR FORM</span></h5>
+
+                <table class="table table-borderless datatable">
+                    <thead>
+                        <tr>
+                            
+                          <th></th>
+                          <th>Open</th>
+                          <th>High</th>
+                          <th>Low</th>
+                          <th>Close</th>
+                          <th>Adj Close</th>
+                          <th>Volume</th>
+                          <th>company_name</th>
+                        </tr>
+                        <tr>
+                          <th>Date</th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% if json_records_MICROSOFT %}
+                        {% for item1, item2 in dataMICROSOFT %}
+                        <tr>
+                         
+                          <th>{{item2}}</th>
+                          <td>{{item1.Open}}</td>
+                          <td>{{item1.High}}</td>
+                          <td>{{item1.Low}}</td>
+                          <td>{{item1.Close}}</td>
+                          <td>{{item1.Adj_Close}}</td>
+                          <td>{{item1.Volume}}</td>
+                          <td>{{item1.company_name}}</td>
+    
+    
+    
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                        
+                    </tbody>
+                </table>             
+             </div>
+
+            </div>
+          </div><!-- End Recent Sales -->
+
+          <!-- Top Selling -->
+          
+        </div>
+      </div><!-- End Left side columns -->
+
+      <!-- Right side columns -->
+      <div class="card">
+          
+        <div class="card-body pb-0">
+            <h5 class="card-title">Closing Price HISTORY FOR MICROSOFT <span>| Graphical Form</span></h5>
+
+          <img style="width:95%;" src="{% static 'images/CCPHH_MICROSOFT.png' %}" alt="">
+        </div>
+      </div><!-- End Budget Report -->
+
+        <!-- Budget Report -->
+        <div class="card">
+          
+          <div class="card-body pb-0">
+            <h5 class="card-title">Sales Volume FOR MICROSOFT <span>| Graphical Form</span></h5>
+
+            <img style="width:95%;" src="{% static 'images/SV_MICROSOFT.png' %}" alt="">
+          </div>
+        </div><!-- End Budget Report -->
+
+        <!-- Website Traffic -->
+        <div class="card">
+          
+
+          <div class="card-body pb-0">
+            <h5 class="card-title">Exploratory Analysis for 10, 20, and 50 days For MICROSOFT <span>| Graphical Form</span></h5>
+            <img style="width:95%; height: 100%;" src="{% static 'images/MAA_MICROSOFT.png' %}" alt="">
+
+            
+          </div>
+        </div><!-- End Website Traffic -->
+
+        <!-- News & Updates Traffic -->
+        <div class="card">
+          
+          <div class="card-body pb-0">
+            
+            <h5 class="card-title">Daily Return For MICROSOFT <span>| Graphical Form</span></h5>
+            <img style="width:95%;" src="{% static 'images/DRR_MICROSOFT.png' %}" alt="">
+
+            
+            
+            </div><!-- End sidebar recent posts-->
+
+          </div>
+        </div><!-- End News & Updates -->
+
+        <div class="card">
+          
+          <div class="card-body pb-0">
+            
+            <h5 class="card-title">Daily Return For MICROSOFT <span>| HISTOGRAM</span></h5>
+            <img style="width:95%;" src="{% static 'images/DRR_HIST_MICROSOFT.png' %}" alt="">
+
+            
+            
+            </div><!-- End sidebar recent posts-->
+
+          </div>
+        </div><!-- End News & Updates -->
+
+      </div><!-- End Right side columns -->
+      {% elif CPS_MICROSOFT %}
+      <div class="col-12">
+            
+
+        <div class="card-body">
+          <h5 class="card-title">CLOSING PRICE STOCK DATA FOR: MICROSOFT <span>| TABULAR FORM</span></h5>
+
+          <table class="table table-borderless datatable">
+              <thead>
+                  <tr>
+                      
+                    <th></th>
+                    
+                    <th>Adj Close</th>
+                   
+                    <th>company_name</th>
+                  </tr>
+                  <tr>
+                    <th>Date</th>
+                    
+                    
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% if json_records_MCPS %}
+                  {% for item1, item2 in dataMICROSOFT_CPS %}
+                  <tr>
+                   
+                    <th>{{item2}}</th>
+                    <td>{{item1.Adj_Close}}</td>
+                    <td>MICROSOFT</td>
+                    
+
+
+                  </tr>
+                  {% endfor %}
+                  {% endif %}
+                  
+              </tbody>
+          </table>             
+       </div>
+
+      </div>
+      <div class="card">
+          
+        <div class="card-body pb-0">
+          
+          <h5 class="card-title">Closing Price History For MICROSOFT <span>| Graphical Form</span></h5>
+          <img style="width:95%;" src="{% static 'images/CCPHH_MICROSOFT.png' %}" alt="">
+
+          
+          
+          </div><!-- End sidebar recent posts-->
+
+        </div>
+      </div><!-- End News & Updates -->
+      
+
+
+      {% elif SV_MICROSOFT %}
+      <div class="col-12">
+            
+
+        <div class="card-body">
+          <h5 class="card-title">SALES VOLUME DATA FOR: MICROSOFT <span>| TABULAR FORM</span></h5>
+
+          <table class="table table-borderless datatable">
+              <thead>
+                  <tr>
+                      
+                    <th></th>
+                    
+                    <th>Volume</th>
+                   
+                    <th>company_name</th>
+                  </tr>
+                  <tr>
+                    <th>Date</th>
+                    
+                    
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% if json_records_MSV %}
+                  {% for item1, item2 in dataMICROSOFT_SV %}
+                  <tr>
+                   
+                    <th>{{item2}}</th>
+                    <td>{{item1.Volume}}</td>
+                    <td>MICROSOFT</td>
+                    
+
+
+                  </tr>
+                  {% endfor %}
+                  {% endif %}
+                  
+              </tbody>
+          </table>             
+       </div>
+
+      </div>
+      <div class="card">
+          
+        <div class="card-body pb-0">
+          
+          <h5 class="card-title">Sales Volume For MICROSOFT <span>| Graphical Form</span></h5>
+          <img style="width:95%;" src="{% static 'images/SV_MICROSOFT.png' %}" alt="">
+
+          
+          
+          </div><!-- End sidebar recent posts-->
+
+        </div>
+      </div><!-- End News & Updates -->
+      {% elif MA_MICROSOFT %}
+      <div class="card">
+          
+        <div class="card-body pb-0">
+          
+          <h5 class="card-title">Exploratory Analysis for 10, 20, and 50 days For MICROSOFT <span>| Graphical Form</span></h5>
+          <img style="width:95%; height: 90%;" src="{% static 'images/MAA_MICROSOFT.png' %}" alt="">
+
+          
+          
+          </div><!-- End sidebar recent posts-->
+
+        </div>
+      </div><!-- End News & Updates -->
+      {% elif DR_MICROSOFT %}
+      <div class="card">
+          
+        <div class="card-body pb-0">
+          
+          <h5 class="card-title">Daily Return For MICROSOFT <span>| Graphical Form</span></h5>
+          <img style="width:95%; height: 90%;" src="{% static 'images/DRR_MICROSOFT.png' %}" alt="">
+
+          
+          
+          </div><!-- End sidebar recent posts-->
+
+        </div>
+      </div><!-- End News & Updates -->
+      <div class="card">
+          
+        <div class="card-body pb-0">
+          
+          <h5 class="card-title">Daily Return For MICROSOFT <span>| HISTOGRAM</span></h5>
+          <img style="width:95%; height: 90%;" src="{% static 'images/DRR_HIST_MICROSOFT.png' %}" alt="">
+
+          
+          
+          </div><!-- End sidebar recent posts-->
+
+        </div>
+      </div><!-- End News & Updates -->
+    
+      {% elif json_records_AMAZON %}
+          <!-- Recent Sales -->
+          <div class="col-12">
+            
+
+              <div class="card-body">
+                <h5 class="card-title">ALL DATA FOR: AMAZON <span>| TABULAR FORM</span></h5>
+
+                <table class="table table-borderless datatable">
+                    <thead>
+                        <tr>
+                            
+                          <th></th>
+                          <th>Open</th>
+                          <th>High</th>
+                          <th>Low</th>
+                          <th>Close</th>
+                          <th>Adj Close</th>
+                          <th>Volume</th>
+                          <th>company_name</th>
+                        </tr>
+                        <tr>
+                          <th>Date</th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% if json_records_AMAZON %}
+                        {% for item1, item2 in dataAMAZON %}
+                        <tr>
+                         
+                          <th>{{item2}}</th>
+                          <td>{{item1.Open}}</td>
+                          <td>{{item1.High}}</td>
+                          <td>{{item1.Low}}</td>
+                          <td>{{item1.Close}}</td>
+                          <td>{{item1.Adj_Close}}</td>
+                          <td>{{item1.Volume}}</td>
+                          <td>{{item1.company_name}}</td>
+    
+    
+    
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                        
+                    </tbody>
+                </table>             
+             </div>
+
+            </div>
+          </div><!-- End Recent Sales -->
+
+          <!-- Top Selling -->
+          
+        </div>
+      </div><!-- End Left side columns -->
+
+      <!-- Right side columns -->
+      <div class="card">
+          
+        <div class="card-body pb-0">
+            <h5 class="card-title">Closing Price HISTORY FOR AMAZON <span>| Graphical Form</span></h5>
+
+          <img style="width:95%;" src="{% static 'images/CCPHH_AMAZON.png' %}" alt="">
+        </div>
+      </div><!-- End Budget Report -->
+
+        <!-- Budget Report -->
+        <div class="card">
+          
+          <div class="card-body pb-0">
+            <h5 class="card-title">Sales Volume FOR AMAZON <span>| Graphical Form</span></h5>
+
+            <img style="width:95%;" src="{% static 'images/SV_AMAZON.png' %}" alt="">
+          </div>
+        </div><!-- End Budget Report -->
+
+        <!-- Website Traffic -->
+        <div class="card">
+          
+
+          <div class="card-body pb-0">
+            <h5 class="card-title">Exploratory Analysis for 10, 20, and 50 days For AMAZON <span>| Graphical Form</span></h5>
+            <img style="width:95%; height: 100%;" src="{% static 'images/MAA_AMAZON.png' %}" alt="">
+
+            
+          </div>
+        </div><!-- End Website Traffic -->
+
+        <!-- News & Updates Traffic -->
+        <div class="card">
+          
+          <div class="card-body pb-0">
+            
+            <h5 class="card-title">Daily Return For AMAZON <span>| Graphical Form</span></h5>
+            <img style="width:95%;" src="{% static 'images/DRR_AMAZON.png' %}" alt="">
+
+            
+            
+            </div><!-- End sidebar recent posts-->
+
+          </div>
+        </div><!-- End News & Updates -->
+
+        <div class="card">
+          
+          <div class="card-body pb-0">
+            
+            <h5 class="card-title">Daily Return For AMAZON <span>| HISTOGRAM</span></h5>
+            <img style="width:95%;" src="{% static 'images/DRR_HIST_AMAZON.png' %}" alt="">
+
+            
+            
+            </div><!-- End sidebar recent posts-->
+
+          </div>
+        </div><!-- End News & Updates -->
+
+      </div><!-- End Right side columns -->
+      {% elif CPS_AMAZON %}
+      <div class="col-12">
+            
+
+        <div class="card-body">
+          <h5 class="card-title">CLOSING PRICE STOCK DATA FOR: AMAZON <span>| TABULAR FORM</span></h5>
+
+          <table class="table table-borderless datatable">
+              <thead>
+                  <tr>
+                      
+                    <th></th>
+                    
+                    <th>Adj Close</th>
+                   
+                    <th>company_name</th>
+                  </tr>
+                  <tr>
+                    <th>Date</th>
+                    
+                    
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% if json_records_ACPS %}
+                  {% for item1, item2 in dataAMAZON_CPS %}
+                  <tr>
+                   
+                    <th>{{item2}}</th>
+                    <td>{{item1.Adj_Close}}</td>
+                    <td>AMAZON</td>
+                    
+
+
+                  </tr>
+                  {% endfor %}
+                  {% endif %}
+                  
+              </tbody>
+          </table>             
+       </div>
+
+      </div>
+      <div class="card">
+          
+        <div class="card-body pb-0">
+          
+          <h5 class="card-title">Closing Price History For AMAZON <span>| Graphical Form</span></h5>
+          <img style="width:95%;" src="{% static 'images/CCPHH_AMAZON.png' %}" alt="">
+
+          
+          
+          </div><!-- End sidebar recent posts-->
+
+        </div>
+      </div><!-- End News & Updates -->
+      
+
+
+      {% elif SV_AMAZON %}
+      <div class="col-12">
+            
+
+        <div class="card-body">
+          <h5 class="card-title">SALES VOLUME DATA FOR: AMAZON <span>| TABULAR FORM</span></h5>
+
+          <table class="table table-borderless datatable">
+              <thead>
+                  <tr>
+                      
+                    <th></th>
+                    
+                    <th>Volume</th>
+                   
+                    <th>company_name</th>
+                  </tr>
+                  <tr>
+                    <th>Date</th>
+                    
+                    
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% if json_records_ASV %}
+                  {% for item1, item2 in dataAMAZON_SV %}
+                  <tr>
+                   
+                    <th>{{item2}}</th>
+                    <td>{{item1.Volume}}</td>
+                    <td>AMAZON</td>
+                    
+
+
+                  </tr>
+                  {% endfor %}
+                  {% endif %}
+                  
+              </tbody>
+          </table>             
+       </div>
+
+      </div>
+      <div class="card">
+          
+        <div class="card-body pb-0">
+          
+          <h5 class="card-title">Sales Volume For AMAZON <span>| Graphical Form</span></h5>
+          <img style="width:95%;" src="{% static 'images/SV_AMAZON.png' %}" alt="">
+
+          
+          
+          </div><!-- End sidebar recent posts-->
+
+        </div>
+      </div><!-- End News & Updates -->
+      {% elif MA_AMAZON %}
+      <div class="card">
+          
+        <div class="card-body pb-0">
+          
+          <h5 class="card-title">Exploratory Analysis for 10, 20, and 50 days For AMAZON <span>| Graphical Form</span></h5>
+          <img style="width:95%; height: 90%;" src="{% static 'images/MAA_AMAZON.png' %}" alt="">
+
+          
+          
+          </div><!-- End sidebar recent posts-->
+
+        </div>
+      </div><!-- End News & Updates -->
+      {% elif DR_AMAZON %}
+      <div class="card">
+          
+        <div class="card-body pb-0">
+          
+          <h5 class="card-title">Daily Return For AMAZON <span>| Graphical Form</span></h5>
+          <img style="width:95%; height: 90%;" src="{% static 'images/DRR_AMAZON.png' %}" alt="">
+
+          
+          
+          </div><!-- End sidebar recent posts-->
+
+        </div>
+      </div><!-- End News & Updates -->
+      <div class="card">
+          
+        <div class="card-body pb-0">
+          
+          <h5 class="card-title">Daily Return For AMAZON <span>| HISTOGRAM</span></h5>
+          <img style="width:95%; height: 90%;" src="{% static 'images/DRR_HIST_AMAZON.png' %}" alt="">
+
+          
+          
+          </div><!-- End sidebar recent posts-->
+
+        </div>
+      </div><!-- End News & Updates -->
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      {% endif %}
+    </div>
+  </section>
+
+</main><!-- End #main -->
+
+
+{% endblock content %}

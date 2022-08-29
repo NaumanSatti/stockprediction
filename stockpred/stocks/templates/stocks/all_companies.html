@@ -1,0 +1,155 @@
+{% extends 'stocks/main.html' %}
+
+{% load static %}
+
+{% block title %}
+Main Data (All Companies)  
+{% endblock title %}
+{% block content%}
+
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>Dashboard</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item active">Dashboard</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+  <section class="section dashboard">
+    <div class="row">
+
+      <!-- Left side columns -->
+      <div class="col-lg-12">
+        <div class="row">
+
+          
+          <!-- Recent Sales -->
+          <div class="col-12">
+            <div class="card recent-sales overflow-auto">
+
+              
+              <div class="card-body">
+                <h5 class="card-title">Recent Sales <span>| Today</span></h5>
+
+                <table class="table table-borderless datatable">
+                    <thead>
+                        <tr>
+                            
+                          <th></th>
+                          <th>Open</th>
+                          <th>High</th>
+                          <th>Low</th>
+                          <th>Close</th>
+                          <th>Adj Close</th>
+                          <th>Volume</th>
+                          <th>company_name</th>
+                        </tr>
+                        <tr>
+                          <th>Date</th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% if json_records %}
+                        {% for item1, item2 in data %}
+                        <tr>
+                         
+                          <th>{{item2}}</th>
+                          <td>{{item1.Open}}</td>
+                          <td>{{item1.High}}</td>
+                          <td>{{item1.Low}}</td>
+                          <td>{{item1.Close}}</td>
+                          <td>{{item1.Adj_Close}}</td>
+                          <td>{{item1.Volume}}</td>
+                          <td>{{item1.company_name}}</td>
+    
+    
+    
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                        
+                    </tbody>
+                </table>
+
+              </div>
+
+            </div>
+          </div><!-- End Recent Sales -->
+          
+          <!-- Top Selling -->
+          
+      </div><!-- End Left side columns -->
+
+      <!-- Right side columns -->
+      
+        <!-- Budget Report -->
+        
+                <div class="card">
+          
+                    <div class="card-body pb-0">
+                        <h5 class="card-title">Closing Prices <span>| All Companies(Combined)</span></h5>
+                        <img style="width:95%;" src="{% static 'images/ClosingPrices.png' %}" alt="">
+
+            
+
+            
+                    </div>
+                </div><!-- End Budget Report -->
+
+                <div class="card">
+          
+                    <div class="card-body pb-0">
+                        <h5 class="card-title">Sales Volume <span>| All Companies(Combined)</span></h5>
+                        <img style="width:95%;" src="{% static 'images/SalesVolume.png' %}" alt="">
+
+            
+
+            
+                    </div>
+                </div><!-- End Budget Report -->
+
+                <div class="card">
+          
+                    <div class="card-body pb-0">
+                        <h5 class="card-title">Exploratory Analysis for 10, 20, and 50 days <span>| All Companies(Combined)</span></h5>
+                        <img style="width:95%;" src="{% static 'images/xyz.png' %}" alt="">
+
+            
+
+            
+                    </div>
+                </div><!-- End Budget Report -->
+
+                <div class="card">
+          
+                    <div class="card-body pb-0">
+                        <h5 class="card-title">Daily Return <span>| All Companies(Combined)</span></h5>
+                        <img style="width:95%;" src="{% static 'images/Dailyreturn.png' %}" alt="">
+
+            
+
+            
+                    </div>
+                </div><!-- End Budget Report -->
+         
+       
+      </div><!-- End Right side columns -->
+
+    </div>
+  </section>
+
+</main><!-- End #main -->
+
+
+{% endblock content %}
